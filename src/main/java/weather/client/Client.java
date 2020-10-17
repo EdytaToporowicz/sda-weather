@@ -40,6 +40,7 @@ public class Client {
             double longitude = scanner.nextDouble();
             System.out.println("Podaj region: ");
             String regionName = scanner.nextLine();
+            scanner.next();
             System.out.println("Podaj nazwę kraju: ");
             String countryName = scanner.nextLine();
 
