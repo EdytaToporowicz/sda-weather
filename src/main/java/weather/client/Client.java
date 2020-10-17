@@ -1,8 +1,12 @@
 package weather.client;
 
+import weather.application.LocationController;
+
 import java.util.Scanner;
 
 public class Client {
+    private final LocationController locationController = new LocationController();
+
     public void runClientInterface() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Menu aplikacji WEATHER: ");
@@ -30,27 +34,30 @@ public class Client {
         }
     }
 
-        private void addNewLocation () {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Podaj miasto: ");
-            String cityName = scanner.nextLine();
-            System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N): ");
-            double latitude = scanner.nextDouble();
-            System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
-            double longitude = scanner.nextDouble();
-            scanner.nextLine();
-            System.out.println("Podaj region: ");
-            String regionName = scanner.nextLine();
-            System.out.println("Podaj nazwę kraju: ");
-            String countryName = scanner.nextLine();
+    private void addNewLocation() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj miasto: ");
+        String cityName = scanner.nextLine();
+        System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N): ");
+        int latitude = scanner.nextInt();
+        System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
+        int longitude = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Podaj region: ");
+        String regionName = scanner.nextLine();
+        System.out.println("Podaj nazwę kraju: ");
+        String countryName = scanner.nextLine();
 
-            System.out.println("Dodano nową lokalizację.");
-        }
-
-        private void showLocations () {
-        }
-
-        private void getWeather () {
-        }
+        System.out.println("Dodano nową lokalizację.");
     }
+
+    private void showLocations() {
+        String location = locationController.readAllLocations();
+        System.out.println("Twoje lokalizacje: " + location);
+    }
+
+    private void getWeather() {
+
+    }
+}
 

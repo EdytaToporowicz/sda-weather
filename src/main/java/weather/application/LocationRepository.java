@@ -1,4 +1,4 @@
 package weather.application;
 
-public class LocationRepository {
+public class LocationRepository {   //warstwa danych
 }
