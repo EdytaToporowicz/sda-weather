@@ -33,6 +33,19 @@ public class ExampleApplication {
 
 
     private static void addNewLocation() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj miasto: ");
+        String cityName = scanner.nextLine();
+        System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N): ");
+        double latitude = scanner.nextDouble();
+        System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
+        double longitude = scanner.nextDouble();
+        System.out.println("Podaj region: ");
+        String regionName = scanner.nextLine();
+        System.out.println("Podaj nazwę kraju: ");
+        String countryName = scanner.nextLine();
+
+
     }
 
     private static void showLocations() {
