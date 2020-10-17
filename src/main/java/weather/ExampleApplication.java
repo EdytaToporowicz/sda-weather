@@ -7,6 +7,4 @@ public class ExampleApplication {
         Client client = new Client();
         client.runClientInterface();
     }
-
-
 }

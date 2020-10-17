@@ -38,9 +38,9 @@ public class Client {
             double latitude = scanner.nextDouble();
             System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
             double longitude = scanner.nextDouble();
+            scanner.nextLine();
             System.out.println("Podaj region: ");
             String regionName = scanner.nextLine();
-            scanner.next();
             System.out.println("Podaj nazwę kraju: ");
             String countryName = scanner.nextLine();
 
