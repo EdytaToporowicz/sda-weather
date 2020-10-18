@@ -25,7 +25,7 @@ public class Client {
                     showAllLocations();
                     break;
                 case 3:
-                    getCurrentWeather();
+                    getWeather();
                     break;
                 case 0:
                     System.out.println("Zamykam aplikację.");
@@ -57,8 +57,9 @@ public class Client {
         System.out.println("Twoje lokalizacje: " + allLocations);
     }
 
-    private void getCurrentWeather() {
-
+    private void getWeather() {
+        String currentWeather = locationController.getCurrentWeather();
+        System.out.println("Pogoda teraz: "+currentWeather);
     }
 }
 
