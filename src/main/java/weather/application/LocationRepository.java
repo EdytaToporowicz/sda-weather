@@ -7,23 +7,14 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import java.util.Collections;
 import java.util.List;
 
 public class LocationRepository {   // warstwa danych
 
-    private final SessionFactory sessionFactory;
 
-    public LocationRepository() {
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure().build();
-
-        sessionFactory = new MetadataSources(registry)
-                .buildMetadata()
-                .buildSessionFactory();
-    }
 
     public Location saveNewLocation(Location location) {
+        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -36,6 +27,7 @@ public class LocationRepository {   // warstwa danych
     }
 
     public List<Location> readAllLocationsSaved() {
+        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
