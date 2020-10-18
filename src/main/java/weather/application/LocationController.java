@@ -16,7 +16,7 @@ public class LocationController {   //warstwa prezentacji
         try {
             return objectMapper.writeValueAsString(location);   //Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Błąd dodawania lokalizacji.");
+            throw new RuntimeException("Błąd dodawania lokalizacji.");      // todo: create your own exception eg. InternalServerException -> 500 status code
         }
     }
 

@@ -6,17 +6,20 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtils {
+
     private static SessionFactory sessionFactory;
 
-    public HibernateUtils() {
+    static {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure().build();
+                .configure()
+                .build();
 
         sessionFactory = new MetadataSources(registry)
                 .buildMetadata()
                 .buildSessionFactory();
     }
-    public static SessionFactory getSessionFactory(){
+
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }

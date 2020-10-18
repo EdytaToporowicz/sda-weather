@@ -54,6 +54,12 @@ public class Client {
 
     private void showAllLocations() {
         String allLocations = locationController.readAllLocations();
+
+        allLocations = allLocations.replaceAll("\\[","\n")
+                .replaceAll("\\{","\n")
+                .replaceAll("\\}","")
+                .replaceAll("\\]","");
+
         System.out.println("Twoje lokalizacje: " + allLocations);
     }
 

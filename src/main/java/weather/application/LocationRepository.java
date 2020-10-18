@@ -11,8 +11,6 @@ import java.util.List;
 
 public class LocationRepository {   // warstwa danych
 
-
-
     public Location saveNewLocation(Location location) {
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();

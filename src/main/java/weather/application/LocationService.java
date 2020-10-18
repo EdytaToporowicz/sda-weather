@@ -2,16 +2,13 @@ package weather.application;
 
 import java.util.List;
 
-public class LocationService {//warstwa logiki biznesowej
+public class LocationService {  //warstwa logiki biznesowej
 
     private final LocationRepository locationRepository = new LocationRepository();
 
-
     public Location addNewLocation(String cityName, int latitude, int longitude, String regionName, String countryName) {
-
-        if (cityName == null || cityName.isBlank()
-                || countryName == null || countryName.isBlank()) {
-            throw new RuntimeException("Miasto nie może być puste.");
+        if (cityName == null || cityName.isBlank() || countryName == null || countryName.isBlank()) {
+            throw new BadRequestException("Miasto nie może być puste.");
         }
         if (latitude < -90 || latitude > 90) {
             throw new RuntimeException("Niepoprawna szerokość.");
@@ -30,7 +27,6 @@ public class LocationService {//warstwa logiki biznesowej
     }
 
     public String getCurrentWeatherNow() {          // ???
-
         return null;
     }
 }
