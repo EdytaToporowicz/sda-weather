@@ -66,8 +66,8 @@ public class Client {
     }
 
     private void showWeather() {
-        String weather = weatherController.showWeather("London");
-        System.out.println("Pogoda teraz: " + weather);
+        String weather = weatherController.showWeather("London");   //
+        System.out.println("Pogoda dla wybranej lokalizacji: " + weather);
     }
 }
 
