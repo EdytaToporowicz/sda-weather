@@ -32,6 +32,7 @@ public class LocationController {   //warstwa prezentacji
 
     public String getCurrentWeather() {
         String weatherNow = locationService.getCurrentWeatherNow();
+//        return weatherNow.toString();
         try {
             return objectMapper.writeValueAsString(weatherNow);
         } catch (JsonProcessingException e) {

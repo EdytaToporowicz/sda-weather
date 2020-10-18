@@ -1,8 +1,5 @@
 package weather.application;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import java.util.List;
 
 public class LocationService {//warstwa logiki biznesowej
@@ -13,8 +10,8 @@ public class LocationService {//warstwa logiki biznesowej
     public Location addNewLocation(String cityName, int latitude, int longitude, String regionName, String countryName) {
 
         if (cityName == null || cityName.isEmpty()                  //wpisuj, aż poprawne
-                || regionName == null || regionName.isEmpty()
-                || countryName == null || countryName.isEmpty()) {
+                || regionName == null || regionName.isBlank()
+                || countryName == null || countryName.isBlank()) {
             throw new RuntimeException("Miasto nie może być puste.");
         }
         if (latitude < -90 || latitude > 90) {
