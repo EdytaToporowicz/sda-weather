@@ -9,8 +9,7 @@ public class LocationService {//warstwa logiki biznesowej
 
     public Location addNewLocation(String cityName, int latitude, int longitude, String regionName, String countryName) {
 
-        if (cityName == null || cityName.isEmpty()                  //wpisuj, aż poprawne
-                || regionName == null || regionName.isBlank()
+        if (cityName == null || cityName.isBlank()
                 || countryName == null || countryName.isBlank()) {
             throw new RuntimeException("Miasto nie może być puste.");
         }

@@ -1,5 +1,4 @@
 package weather.application;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,3 +46,4 @@ class LocationServiceTest {
         assertThrows(Exception.class, () -> locationService.addNewLocation("city", 0, 181, "region", "country"));
     }
 }
+
