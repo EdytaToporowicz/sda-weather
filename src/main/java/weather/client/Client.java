@@ -19,13 +19,13 @@ public class Client {
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    addNewLocation();
+                    addLocation();
                     break;
                 case 2:
-                    showLocations();
+                    showAllLocations();
                     break;
                 case 3:
-                    getWeather();
+                    getCurrentWeather();
                     break;
                 case 0:
                     System.out.println("Zamykam aplikację.");
@@ -34,7 +34,7 @@ public class Client {
         }
     }
 
-    private void addNewLocation() {
+    private void addLocation() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj miasto: ");
         String cityName = scanner.nextLine();
@@ -48,15 +48,16 @@ public class Client {
         System.out.println("Podaj nazwę kraju: ");
         String countryName = scanner.nextLine();
 
-        System.out.println("Dodano nową lokalizację.");
+        String addedLocation = locationController.addLocation(cityName, latitude, longitude, regionName, countryName);
+        System.out.println("Dodano nową lokalizację: " + addedLocation);
     }
 
-    private void showLocations() {
-        String location = locationController.readAllLocations();
-        System.out.println("Twoje lokalizacje: " + location);
+    private void showAllLocations() {
+        String allLocations = locationController.readAllLocations();
+        System.out.println("Twoje lokalizacje: " + allLocations);
     }
 
-    private void getWeather() {
+    private void getCurrentWeather() {
 
     }
 }
