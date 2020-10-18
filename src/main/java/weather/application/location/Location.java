@@ -1,7 +1,6 @@
-package weather.application;
+package weather.application.location;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;

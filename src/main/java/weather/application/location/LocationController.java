@@ -1,7 +1,8 @@
-package weather.application;
+package weather.application.location;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import weather.application.exceptions.InternalServerException;
 
 import java.util.List;
 
@@ -16,27 +17,17 @@ public class LocationController {   //warstwa prezentacji
         try {
             return objectMapper.writeValueAsString(location);   //Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Błąd dodawania lokalizacji.");      // todo: create your own exception eg. InternalServerException -> 500 status code
+            throw new InternalServerException("Błąd dodawania lokalizacji.");
         }
     }
 
-    public String readAllLocations() {
-        List<Location> locations = locationService.readAllLocationsSaved();
+    public String showAllLocations() {
+        List<Location> locations = locationService.showAllLocationsSaved();
 //        return locations.toString();
         try {
             return objectMapper.writeValueAsString(locations);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Błąd odczytywania lokalizacji.");
-        }
-    }
-
-    public String getCurrentWeather() {
-        String weatherNow = locationService.getCurrentWeatherNow();
-//        return weatherNow.toString();
-        try {
-            return objectMapper.writeValueAsString(weatherNow);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Błąd pobierania pogody.");
+            throw new InternalServerException("Błąd odczytywania lokalizacji.");
         }
     }
 }

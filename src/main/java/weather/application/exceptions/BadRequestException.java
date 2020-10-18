@@ -1,4 +1,4 @@
-package weather.application;
+package weather.application.exceptions;
 
 public class BadRequestException extends RuntimeException {
 

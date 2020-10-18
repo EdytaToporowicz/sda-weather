@@ -1,6 +1,9 @@
 package weather.application;
 
 import org.junit.jupiter.api.Test;
+import weather.application.exceptions.BadRequestException;
+import weather.application.location.Location;
+import weather.application.location.LocationService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

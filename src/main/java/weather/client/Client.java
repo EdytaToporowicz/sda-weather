@@ -1,11 +1,13 @@
 package weather.client;
 
-import weather.application.LocationController;
+import weather.application.location.LocationController;
+import weather.application.weather.WeatherController;
 
 import java.util.Scanner;
 
 public class Client {
     private final LocationController locationController = new LocationController();
+    private final WeatherController weatherController = new WeatherController();
 
     public void runClientInterface() {
         Scanner scanner = new Scanner(System.in);
@@ -15,7 +17,7 @@ public class Client {
             System.out.println("Wybierz, co chcesz zrobić lub 0: ");
             System.out.println("1. Dodaj lokalizację.");
             System.out.println("2. Wyświetl dodane lokalizacje.");
-            System.out.println("3. Pobierz pogodę.");
+            System.out.println("3. Wyświetl pogodę.");
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
@@ -25,7 +27,7 @@ public class Client {
                     showAllLocations();
                     break;
                 case 3:
-                    getWeather();
+                    showWeather();
                     break;
                 case 0:
                     System.out.println("Zamykam aplikację.");
@@ -53,19 +55,19 @@ public class Client {
     }
 
     private void showAllLocations() {
-        String allLocations = locationController.readAllLocations();
+        String allLocations = locationController.showAllLocations();
 
-        allLocations = allLocations.replaceAll("\\[","\n")
-                .replaceAll("\\{","\n")
-                .replaceAll("\\}","")
-                .replaceAll("\\]","");
+        allLocations = allLocations.replaceAll("\\[", "\n")
+                .replaceAll("\\{", "\n")
+                .replaceAll("\\}", "")
+                .replaceAll("\\]", "");
 
         System.out.println("Twoje lokalizacje: " + allLocations);
     }
 
-    private void getWeather() {
-        String currentWeather = locationController.getCurrentWeather();
-        System.out.println("Pogoda teraz: "+currentWeather);
+    private void showWeather() {
+        String weather = weatherController.showWeather();
+        System.out.println("Pogoda teraz: " + weather);
     }
 }
 
