@@ -14,7 +14,7 @@ public class LocationController {   //warstwa prezentacji
         Location location = locationService.addNewLocation(cityName, latitude, longitude, regionName, countryName); //obiekt javovy z danymi
 //        return location.toString();
         try {
-            return objectMapper.writeValueAsString(location);//Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
+            return objectMapper.writeValueAsString(location);   //Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Błąd dodawania lokalizacji.");
         }

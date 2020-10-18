@@ -12,7 +12,7 @@ public class LocationService {//warstwa logiki biznesowej
 
     public Location addNewLocation(String cityName, int latitude, int longitude, String regionName, String countryName) {
 
-        if (cityName == null || cityName.isEmpty()
+        if (cityName == null || cityName.isEmpty()                  //wpisuj, aż poprawne
                 || regionName == null || regionName.isEmpty()
                 || countryName == null || countryName.isEmpty()) {
             throw new RuntimeException("Miasto nie może być puste.");
@@ -33,7 +33,7 @@ public class LocationService {//warstwa logiki biznesowej
         return locationRepository.readAllLocationsSaved();
     }
 
-    public String getCurrentWeatherNow() {
+    public String getCurrentWeatherNow() {          // ???
 
         return null;
     }
