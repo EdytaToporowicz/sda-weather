@@ -8,8 +8,8 @@ public class WeatherController {  //warstwa prezentacji
     private final WeatherService weatherService = new WeatherService();
     private final ObjectMapper objectMapper = new ObjectMapper();   //Jackson - żeby dane jako plik json a nie String
 
-    public String showWeather(String cityName) {
-        Weather weather = weatherService.getWeather(cityName);
+    public String showWeather(String cityName, String weatherDate) {
+        Weather weather = weatherService.getWeather(cityName, weatherDate);
 
         try {
             return objectMapper.writeValueAsString(weather);

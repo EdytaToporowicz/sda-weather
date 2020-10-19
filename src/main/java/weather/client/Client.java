@@ -55,7 +55,7 @@ public class Client {
     }
 
     private void showAllLocations() {
-        String allLocations = locationController.showAllLocations();
+        String allLocations = locationController.showLocations();
 
         allLocations = allLocations.replaceAll("\\[", "\n")
                 .replaceAll("\\{", "\n")
@@ -66,7 +66,26 @@ public class Client {
     }
 
     private void showWeather() {
-        String weather = weatherController.showWeather("London");   //
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj lokalizację dla pogody: 1-miasto / 2-wsp.geogr.: ");
+        int response = scanner.nextInt();
+        String cityName = null;
+        switch (response) {
+            case 1:
+                System.out.println("Miasto: ");
+                cityName = scanner.nextLine();
+                break;
+//            case 2:
+//                System.out.println("Współrzędne - szerokość: ");
+//                double latitudeCoordinates = scanner.nextDouble();
+//                System.out.println("długość: ");
+//                double longitudeCoordinates = scanner.nextDouble();
+//                break;
+        }
+
+        System.out.println("Podaj datę (YYYY-MM-DD): ");
+        String weatherDate = scanner.nextLine();
+        String weather = weatherController.showWeather(cityName, weatherDate);   //
         System.out.println("Pogoda dla wybranej lokalizacji: " + weather);
     }
 }

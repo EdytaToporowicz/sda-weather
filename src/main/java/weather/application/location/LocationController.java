@@ -6,6 +6,7 @@ import weather.application.exceptions.InternalServerException;
 
 import java.util.List;
 
+
 public class LocationController {   //warstwa prezentacji
 
     private final LocationService locationService = new LocationService();
@@ -21,8 +22,8 @@ public class LocationController {   //warstwa prezentacji
         }
     }
 
-    public String showAllLocations() {
-        List<Location> locations = locationService.showAllLocationsSaved();
+    public String showLocations() {
+        List<Location> locations = locationService.showSavedLocations();
 //        return locations.toString();
         try {
             return objectMapper.writeValueAsString(locations);

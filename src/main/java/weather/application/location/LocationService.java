@@ -28,7 +28,7 @@ public class LocationService {  //warstwa logiki biznesowej
         return savedLocation;
     }
 
-    public List<Location> showAllLocationsSaved() {
+    public List<Location> showSavedLocations() {
         return locationRepository.readAllLocationsSaved();
     }
 

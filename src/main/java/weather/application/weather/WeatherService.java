@@ -4,7 +4,7 @@ public class WeatherService {   // warstwa logiki biznesowej
 
     private final WeatherRepository weatherRepository = new WeatherRepository();
 
-    public Weather getWeather(String cityName) {
+    public Weather getWeather(String cityName, String weatherDate) {
         // todo: use external service eg. https://weatherstack.com/documentation
         // todo: create WeatherResponse as a container for new data
         // todo: WeatherResponse -> Weather
