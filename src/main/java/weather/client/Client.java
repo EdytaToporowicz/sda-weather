@@ -69,6 +69,7 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj lokalizację dla pogody: 1-miasto / 2-wsp.geogr.: ");
         int response = scanner.nextInt();
+        scanner.nextLine();
         String cityName = null;
         switch (response) {
             case 1:
