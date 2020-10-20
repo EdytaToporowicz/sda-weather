@@ -16,7 +16,7 @@ public class WeatherParameters {
     private String cityName;
     private double latitude;
     private double longitude;
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)  dodajemy tylko dla klas starego typu np. java.util.Date, java.util.Calendar
     private LocalDate weatherDate;
 
     public WeatherParameters(String cityName, double latitude, double longitude, LocalDate weatherDate) {
