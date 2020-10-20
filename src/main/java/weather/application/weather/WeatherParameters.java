@@ -14,12 +14,12 @@ public class WeatherParameters {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cityName;
-    private double latitude;
-    private double longitude;
+    private int latitude;
+    private int longitude;
 //    @Temporal(TemporalType.DATE)  dodajemy tylko dla klas starego typu np. java.util.Date, java.util.Calendar
     private LocalDate weatherDate;
 
-    public WeatherParameters(String cityName, double latitude, double longitude, LocalDate weatherDate) {
+    public WeatherParameters(String cityName, int latitude, int longitude, LocalDate weatherDate) {
         this.cityName = cityName;
         this.latitude = latitude;
         this.longitude = longitude;

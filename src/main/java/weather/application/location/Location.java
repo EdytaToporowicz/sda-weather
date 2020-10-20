@@ -17,12 +17,12 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cityName;
-    private double latitude;       //szer.geog
-    private double longitude;      //dług.geog
+    private int latitude;       //szer.geog
+    private int longitude;      //dług.geog
     private String regionName;
     private String countryName;
 
-    public Location(String cityName, double latitude, double longitude, String regionName, String countryName) {
+    public Location(String cityName, int latitude, int longitude, String regionName, String countryName) {
         this.cityName = cityName;
         this.latitude = latitude;
         this.longitude = longitude;

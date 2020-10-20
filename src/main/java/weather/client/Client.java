@@ -70,18 +70,18 @@ public class Client {
 
     private void getWeatherParameters() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj lokalizację dla pogody.");
-
-        System.out.println("Miasto: ");
-        String cityName = scanner.nextLine();
-
-        System.out.println("Współrzędne - szerokość: ");
-        int latitude = scanner.nextInt();
-        System.out.println("długość: ");
-        int longitude = scanner.nextInt();
-        scanner.nextLine();
         System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
         String weatherDate = scanner.nextLine();
+
+
+        System.out.println("Podaj miasto dla pogody lub '@': ");
+        String cityName = scanner.nextLine();
+
+        System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N) dla pogody lub '@': ");
+        int latitude = scanner.nextInt();
+
+        System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E) dla pogody lub '@': ");
+        int longitude = scanner.nextInt();
 
         String weatherParameters = weatherController.getWeatherParameters(cityName, latitude, longitude, weatherDate);
     }

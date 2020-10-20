@@ -1,4 +1,4 @@
-package weather.application;
+package weather.application.location;
 
 import org.junit.jupiter.api.Test;
 import weather.application.exceptions.BadRequestException;
