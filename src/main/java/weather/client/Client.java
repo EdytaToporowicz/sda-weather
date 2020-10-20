@@ -84,12 +84,12 @@ public class Client {
         String weatherDate = scanner.nextLine();
 
         String weatherParameters = weatherController.getWeatherParameters(cityName, latitude, longitude, weatherDate);
-
     }
 
 
     private void getWeatherResponse() {
-
+        String weatherResponse = weatherController.addWeatherResponse();
+        System.out.println("Pogoda dla wybranej lokalizacji i daty: " + weatherResponse);
     }
 }
 

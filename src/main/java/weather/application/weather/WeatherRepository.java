@@ -10,11 +10,7 @@ import java.util.List;
 
 public class WeatherRepository {        // warstwa danych
 
-    public List<WeatherResponse> readWeatherInfoFromWWW() {
-        return Collections.emptyList();
-    }
-
-    public WeatherParameters saveWeatherParameters(WeatherParameters weatherParameters) {
+        public WeatherParameters saveWeatherParameters(WeatherParameters weatherParameters) {
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -26,4 +22,7 @@ public class WeatherRepository {        // warstwa danych
 
         return weatherParameters;
     }
+
+
+
 }

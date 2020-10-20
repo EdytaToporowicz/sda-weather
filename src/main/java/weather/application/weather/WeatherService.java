@@ -3,21 +3,21 @@ package weather.application.weather;
 import weather.application.exceptions.BadRequestException;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class WeatherService {   // warstwa logiki biznesowej
 
     private final WeatherRepository weatherRepository = new WeatherRepository();
 
-    public WeatherResponse getWeather(String temperature, String atmosphericPressure, String humidity, String windDirection, String windSpeed) {
-        // todo: use external service eg. https://weatherstack.com/documentation
-        // todo: create WeatherResponse as a container for new data
-        // todo: WeatherResponse -> Weather
-        // todo: save new data of weather to repository
-
-
-        return new WeatherResponse();
-    }
-
+//    public WeatherResponse getWeather(String temperature, String atmosphericPressure, String humidity, String windDirection, String windSpeed) {
+//        // todo: use external service eg. https://weatherstack.com/documentation
+//        // todo: create WeatherResponse as a container for new data
+//        // todo: WeatherResponse -> Weather
+//        // todo: save new data of weather to repository
+//
+//
+//        return new WeatherResponse();
+//    }
 
     public WeatherParameters addWeatherParameters(String cityName, int latitude, int longitude, String weatherDate) {
 
@@ -35,8 +35,19 @@ public class WeatherService {   // warstwa logiki biznesowej
         }
 
         WeatherParameters weatherParameters = new WeatherParameters(cityName, latitude, longitude, weatherDateFromString);
-        WeatherParameters savedWeatherParameters= weatherRepository.saveWeatherParameters(weatherParameters);
+        WeatherParameters savedWeatherParameters = weatherRepository.saveWeatherParameters(weatherParameters);
 
         return savedWeatherParameters;
+    }
+
+
+    public WeatherResponse addWeatherResponse(String temperature, String atmoatmosphericPressure, String humidity, String windDirection, String windSpeed) {
+         //todo: use external service eg. https://weatherstack.com/documentation
+        // todo: create WeatherResponse as a container for new data
+        // todo: WeatherResponse -> Weather
+        // todo: save new data of weather to repository
+
+
+        return new WeatherResponse();
     }
 }
