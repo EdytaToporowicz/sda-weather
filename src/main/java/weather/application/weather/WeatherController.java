@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import weather.application.exceptions.InternalServerException;
 
-import java.util.List;
-
 public class WeatherController {  //warstwa prezentacji
     private final WeatherService weatherService = new WeatherService();
     private final ObjectMapper objectMapper = new ObjectMapper();   //Jackson - żeby dane jako plik json a nie String
@@ -20,8 +18,8 @@ public class WeatherController {  //warstwa prezentacji
     }
 
 
-    public String addWeatherResponse(String temperature,String atmoatmosphericPressure, String humidity, String windDirection, String windSpeed) {
-        WeatherResponse weatherResponse=weatherService.addWeatherResponse(temperature,atmoatmosphericPressure,humidity,windDirection,windSpeed);
+    public String getWeatherResponse(String temperature, String atmoatmosphericPressure, String humidity, String windDirection, String windSpeed) {
+        WeatherResponse weatherResponse=weatherService.getWeatherResponse(temperature,atmoatmosphericPressure,humidity,windDirection,windSpeed);
         try {
             return objectMapper.writeValueAsString(weatherResponse);   //Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
         } catch (JsonProcessingException e) {

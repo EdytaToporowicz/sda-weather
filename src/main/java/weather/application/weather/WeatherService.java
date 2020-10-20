@@ -1,13 +1,16 @@
 package weather.application.weather;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import weather.application.exceptions.BadRequestException;
 
+import java.net.http.HttpClient;
 import java.time.LocalDate;
 import java.util.List;
 
 public class WeatherService {   // warstwa logiki biznesowej
 
     private final WeatherRepository weatherRepository = new WeatherRepository();
+
 
 //    public WeatherResponse getWeather(String temperature, String atmosphericPressure, String humidity, String windDirection, String windSpeed) {
 //        // todo: use external service eg. https://weatherstack.com/documentation
@@ -41,7 +44,7 @@ public class WeatherService {   // warstwa logiki biznesowej
     }
 
 
-    public WeatherResponse addWeatherResponse(String temperature, String atmoatmosphericPressure, String humidity, String windDirection, String windSpeed) {
+    public WeatherResponse getWeatherResponse(String temperature, String atmoatmosphericPressure, String humidity, String windDirection, String windSpeed) {
          //todo: use external service eg. https://weatherstack.com/documentation
         // todo: create WeatherResponse as a container for new data
         // todo: WeatherResponse -> Weather

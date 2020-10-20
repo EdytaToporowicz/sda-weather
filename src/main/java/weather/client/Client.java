@@ -28,7 +28,7 @@ public class Client {
                     break;
                 case 3:
                     getWeatherParameters();
-                    getWeatherResponse();
+//                    getWeatherResponse();
                     break;
                 case 0:
                     System.out.println("Zamykam aplikację.");
@@ -87,9 +87,9 @@ public class Client {
     }
 
 
-    private void getWeatherResponse() {
-        String weatherResponse = weatherController.addWeatherResponse();
-        System.out.println("Pogoda dla wybranej lokalizacji i daty: " + weatherResponse);
-    }
+//    private void getWeatherResponse() {
+//        String weatherResponse = weatherController.getWeatherResponse();
+//        System.out.println("Pogoda dla wybranej lokalizacji i daty: " + weatherResponse);
+//    }
 }
 
