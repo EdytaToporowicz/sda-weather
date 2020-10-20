@@ -1,17 +1,14 @@
 package weather.application.weather;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @Entity
-
+@NoArgsConstructor
 public class WeatherParameters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +16,7 @@ public class WeatherParameters {
     private String cityName;
     private double latitude;
     private double longitude;
+    @Temporal(TemporalType.DATE)
     private LocalDate weatherDate;
 
     public WeatherParameters(String cityName, double latitude, double longitude, LocalDate weatherDate) {
