@@ -32,7 +32,4 @@ public class LocationService {  //warstwa logiki biznesowej
         return locationRepository.readAllLocationsSaved();
     }
 
-    public String getCurrentWeatherNow() {          // ???
-        return null;
-    }
 }

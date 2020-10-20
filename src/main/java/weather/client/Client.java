@@ -37,6 +37,7 @@ public class Client {
         }
     }
 
+
     private void addLocation() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj miasto: ");
@@ -78,15 +79,17 @@ public class Client {
         int latitude = scanner.nextInt();
         System.out.println("długość: ");
         int longitude = scanner.nextInt();
-
+        scanner.nextLine();
         System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
         String weatherDate = scanner.nextLine();
-        weatherController.getWeatherParameters(cityName, latitude, longitude, weatherDate);
+
+        String weatherParameters = weatherController.getWeatherParameters(cityName, latitude, longitude, weatherDate);
+
     }
+
 
     private void getWeatherResponse() {
 
-        weatherController.getWeatherResponse();
     }
 }
 

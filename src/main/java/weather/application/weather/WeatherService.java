@@ -15,15 +15,12 @@ public class WeatherService {   // warstwa logiki biznesowej
         // todo: save new data of weather to repository
 
 
-
-
         return new WeatherResponse();
     }
 
-    public WeatherParameters getWeatherParameters(String cityName, double latitude, double longitude, String weatherDate) {
-        if (cityName == null || cityName.isBlank()) {
-            throw new BadRequestException("Miasto nie może być puste.");
-        }
+
+    public WeatherParameters addWeatherParameters(String cityName, int latitude, int longitude, String weatherDate) {
+
         if (latitude < -90 || latitude > 90) {
             throw new BadRequestException("Niepoprawna szerokość.");
         }
@@ -34,8 +31,12 @@ public class WeatherService {   // warstwa logiki biznesowej
         if (weatherDate == null || weatherDate.isEmpty()) {  //data jutrzejsza
             weatherDateFromString = LocalDate.now().plusDays(1);
         } else {
-            weatherDate = LocalDate.parse(weatherDate);
+            weatherDateFromString = LocalDate.parse(weatherDate);
         }
-        return WeatherParameters;
+
+        WeatherParameters weatherParameters = new WeatherParameters(cityName, latitude, longitude, weatherDateFromString);
+        WeatherParameters savedWeatherParameters= weatherRepository.saveWeatherParameters(weatherParameters);
+
+        return savedWeatherParameters;
     }
 }
