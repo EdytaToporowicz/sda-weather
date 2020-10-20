@@ -31,7 +31,7 @@ public class TimeService {
             String responseBody = httpResponse.body();
 
             TimeResponse timeResponse = objectMapper.readValue(responseBody, TimeResponse.class);
-            String currentDateTime = timeResponse.getCurrentDate();
+            String currentDateTime = timeResponse.getDate();
 
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm'Z'");
             LocalDateTime localDateTime = LocalDateTime.parse(currentDateTime, dateTimeFormatter);

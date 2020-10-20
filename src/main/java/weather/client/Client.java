@@ -27,7 +27,8 @@ public class Client {
                     showAllLocations();
                     break;
                 case 3:
-                    showWeather();
+                    getWeatherParameters();
+                    getWeatherResponse();
                     break;
                 case 0:
                     System.out.println("Zamykam aplikację.");
@@ -65,29 +66,27 @@ public class Client {
         System.out.println("Twoje lokalizacje: " + allLocations);
     }
 
-    private void showWeather() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj lokalizację dla pogody: 1-miasto / 2-wsp.geogr.: ");
-        int response = scanner.nextInt();
-        scanner.nextLine();
-        String cityName = null;
-        switch (response) {
-            case 1:
-                System.out.println("Miasto: ");
-                cityName = scanner.nextLine();
-                break;
-//            case 2:
-//                System.out.println("Współrzędne - szerokość: ");
-//                double latitudeCoordinates = scanner.nextDouble();
-//                System.out.println("długość: ");
-//                double longitudeCoordinates = scanner.nextDouble();
-//                break;
-        }
 
-        System.out.println("Podaj datę (YYYY-MM-DD): ");
+    private void getWeatherParameters() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj lokalizację dla pogody.");
+
+        System.out.println("Miasto: ");
+        String cityName = scanner.nextLine();
+
+        System.out.println("Współrzędne - szerokość: ");
+        int latitude = scanner.nextInt();
+        System.out.println("długość: ");
+        int longitude = scanner.nextInt();
+
+        System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
         String weatherDate = scanner.nextLine();
-        String weather = weatherController.showWeather(cityName, weatherDate);   //
-        System.out.println("Pogoda dla wybranej lokalizacji: " + weather);
+        weatherController.getWeatherParameters(cityName, latitude, longitude, weatherDate);
+    }
+
+    private void getWeatherResponse() {
+
+        weatherController.getWeatherResponse();
     }
 }
 

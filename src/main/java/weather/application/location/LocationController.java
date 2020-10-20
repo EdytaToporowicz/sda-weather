@@ -22,6 +22,7 @@ public class LocationController {   //warstwa prezentacji
         }
     }
 
+
     public String showLocations() {
         List<Location> locations = locationService.showSavedLocations();
 //        return locations.toString();
@@ -31,4 +32,6 @@ public class LocationController {   //warstwa prezentacji
             throw new InternalServerException("Błąd odczytywania lokalizacji.");
         }
     }
+
+
 }

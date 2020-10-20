@@ -11,18 +11,17 @@ import javax.persistence.Id;
 @Data
 @Entity
 @NoArgsConstructor
-public class Weather {
-
+public class WeatherResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double temperature;
-    private int atmosphericPressure;
+    private String temperature;
+    private String atmosphericPressure;
     private String humidity;
     private String windDirection;
     private String windSpeed;
 
-    public Weather(double temperature, int atmosphericPressure, String humidity, String windDirection, String windSpeed) {
+    public WeatherResponse(String temperature, String atmosphericPressure, String humidity, String windDirection, String windSpeed) {
         this.temperature = temperature;
         this.atmosphericPressure = atmosphericPressure;
         this.humidity = humidity;
@@ -30,5 +29,3 @@ public class Weather {
         this.windSpeed = windSpeed;
     }
 }
-
-
