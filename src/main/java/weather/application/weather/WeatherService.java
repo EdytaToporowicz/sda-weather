@@ -27,13 +27,13 @@ public class WeatherService {   // warstwa logiki biznesowej
             weatherDateFromString = LocalDate.parse(weatherDate);
         }
 
-//        if (latitude < -90 || latitude > 90) {
-//            throw new BadRequestException("Niepoprawna szerokość.");
-//        }
-//
-//        if (longitude < -90 || longitude > 90) {
-//            throw new BadRequestException("Niepoprawna długość.");
-//        }
+        if (latitude < -90 || latitude > 90) {
+            throw new BadRequestException("Niepoprawna szerokość.");
+        }
+
+        if (longitude < -90 || longitude > 90) {
+            throw new BadRequestException("Niepoprawna długość.");
+        }
 
 
         WeatherParameters weatherParameters = new WeatherParameters(cityName, latitude, longitude, weatherDateFromString);

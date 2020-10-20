@@ -30,13 +30,13 @@ public class WeatherServiceTest {
         assertEquals(weatherParameters.getLongitude(), 0);
         assertEquals(weatherParameters.getWeatherDate(), LocalDate.now().plusDays(1));
     }
-//    @Test   //???
+//    @Test   //jak sprawdzić gdy latitude puste
 //    void addWeatherParameters_whenLatitudeIsEmpty_shouldReturnNewWeatherParameters(){
 //
 //
 //    }
 
-//    @Test   //???
+//    @Test   //jak sprawdzić gdy longitude puste
 //    void addWeatherParameters_whenLongitudeIsEmpty_shouldReturnNewWeatherParameters(){
 //
 //
