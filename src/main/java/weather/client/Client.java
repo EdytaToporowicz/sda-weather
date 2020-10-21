@@ -17,7 +17,7 @@ public class Client {
             System.out.println("Wybierz, co chcesz zrobić lub 0: ");
             System.out.println("1. Dodaj lokalizację.");
             System.out.println("2. Wyświetl dodane lokalizacje.");
-            System.out.println("3. Wyświetl pogodę.");
+            System.out.println("3. Pobierz pogodę.");
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
