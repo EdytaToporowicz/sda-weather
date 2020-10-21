@@ -52,7 +52,7 @@ public class Client {
         System.out.println("Podaj nazwę kraju: ");
         String countryName = scanner.nextLine();
 
-        String addedLocation = locationController.addLocation(cityName, latitude, longitude, regionName, countryName);
+        String addedLocation = locationController.addNewLocation(cityName, latitude, longitude, regionName, countryName);
         System.out.println("Dodano nową lokalizację: " + addedLocation);
     }
 

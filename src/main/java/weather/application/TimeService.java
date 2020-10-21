@@ -1,18 +1,6 @@
 package weather.application;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-
-public class TimeService {
+/*public class TimeService {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -20,7 +8,7 @@ public class TimeService {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.findAndRegisterModules();
     }
-    public Instant getTime() {
+    public WeatherResponse getWeatherResponse() {
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://worldclockapi.com/api/json/utc/now"))
@@ -41,4 +29,8 @@ public class TimeService {
             return Instant.now();
         }
     }
+
+    public void getWeatherForecast() {
+    }
 }
+*/

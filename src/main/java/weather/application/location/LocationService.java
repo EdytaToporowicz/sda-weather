@@ -21,11 +21,9 @@ public class LocationService {  //warstwa logiki biznesowej
         if (countryName == null || countryName.isBlank()) {
             throw new BadRequestException("Państwo nie może być puste.");
         }
-
         Location location = new Location(cityName, latitude, longitude, regionName, countryName);
-        Location savedLocation = locationRepository.saveNewLocation(location);
 
-        return savedLocation;
+        return locationRepository.saveNewLocation(location);
     }
 
     public List<Location> showSavedLocations() {

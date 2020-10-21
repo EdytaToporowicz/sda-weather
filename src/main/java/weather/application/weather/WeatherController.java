@@ -18,8 +18,8 @@ public class WeatherController {  //warstwa prezentacji
     }
 
 
-    public String getWeatherResponse(String temperature, String atmoatmosphericPressure, String humidity, String windDirection, String windSpeed) {
-        WeatherResponse weatherResponse=weatherService.getWeatherResponse(temperature,atmoatmosphericPressure,humidity,windDirection,windSpeed);
+    public String getWeatherResponse(String cityName) {
+        WeatherResponse weatherResponse = weatherService.getWeatherResponse(cityName);
         try {
             return objectMapper.writeValueAsString(weatherResponse);   //Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
         } catch (JsonProcessingException e) {
