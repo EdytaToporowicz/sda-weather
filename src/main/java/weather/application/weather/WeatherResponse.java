@@ -9,24 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@NoArgsConstructor
-@Entity
-public class WeatherResponse {
+public class WeatherResponse {  // w resources/example_response.json wkleiłem strukturę otrzymanego JSON'a - są tam zagnieżdżone obiekty
+                                // struktura JOSN'a musi odpowiadać tej klasie
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String temperature;
-    private String atmosphericPressure;
-    private String humidity;
-    private String windDirection;
-    private String windSpeed;
+    Current current;
 
-    public WeatherResponse(String temperature, String atmosphericPressure, String humidity, String windDirection, String windSpeed) {
-        this.temperature = temperature;
-        this.atmosphericPressure = atmosphericPressure;
-        this.humidity = humidity;
-        this.windDirection = windDirection;
-        this.windSpeed = windSpeed;
+    @Data
+    static class Current {              // ta klasa może być zdefiniowana w sobnym pliku np. Current.java
+        private String temperature;
+        private String pressure;
+        private String humidity;
+        private String wind_dir;
+        private String wind_speed;
     }
 }

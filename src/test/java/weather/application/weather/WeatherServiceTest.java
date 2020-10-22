@@ -45,7 +45,7 @@ public class WeatherServiceTest {
     @Test
     void savedNewWeatherResponse_returnNewWeatherResponse() {
         //when
-        WeatherResponse response = weatherService.getWeatherResponse("city");
+        Weather response = weatherService.getWeatherResponse("London");
 
         //then
         System.out.println(response);

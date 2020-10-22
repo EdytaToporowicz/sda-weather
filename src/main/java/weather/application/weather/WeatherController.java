@@ -19,9 +19,9 @@ public class WeatherController {  //warstwa prezentacji
 
 
     public String getWeatherResponse(String cityName) {
-        WeatherResponse weatherResponse = weatherService.getWeatherResponse(cityName);
+        Weather weather = weatherService.getWeatherResponse(cityName);
         try {
-            return objectMapper.writeValueAsString(weatherResponse);   //Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
+            return objectMapper.writeValueAsString(weather);   //Jackson - zamiana obiektu javovego 'location' na Stringa, w którym będzie json
         } catch (JsonProcessingException e) {
             throw new InternalServerException("Błąd dodawania danych pogodowych.");
         }

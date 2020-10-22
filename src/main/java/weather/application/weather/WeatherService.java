@@ -45,7 +45,7 @@ public class WeatherService {   // warstwa logiki biznesowej
         return weatherRepository.saveWeatherParameters(weatherParameters);
     }
 
-    public WeatherResponse getWeatherResponse(String cityName) {
+    public Weather getWeatherResponse(String cityName) {
         // todo: use external service eg. https://weatherstack.com/documentation
         // todo: create WeatherResponse as a container for new data
         // todo: WeatherResponse -> Weather
@@ -60,19 +60,20 @@ public class WeatherService {   // warstwa logiki biznesowej
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             String responseBody = httpResponse.body();
 
-            WeatherResponse weatherResponse = objectMapper.readValue(responseBody, WeatherResponse.class);  //odpowiedź w Stringu i na jaką klasę ma być zmapowany
-            String temperatureResponse = weatherResponse.getTemperature();
-            String atmosphericPressureResponse = weatherResponse.getAtmosphericPressure();
-            String humidityResponse = weatherResponse.getHumidity();
-            String windDirectionResponse = weatherResponse.getWindDirection();
-            String windSpeedResponse = weatherResponse.getWindSpeed();
+            System.out.println(responseBody);
 
-            return new WeatherResponse(temperatureResponse, atmosphericPressureResponse, humidityResponse, windDirectionResponse, windSpeedResponse);
+            WeatherResponse weatherResponse = objectMapper.readValue(responseBody, WeatherResponse.class);  //odpowiedź w Stringu i na jaką klasę ma być zmapowany
+            WeatherResponse.Current current = weatherResponse.getCurrent();
+            String temperatureResponse = current.getTemperature();
+            String atmosphericPressureResponse = current.getPressure();
+            String humidityResponse = current.getHumidity();
+            String windDirectionResponse = current.getWind_dir();
+            String windSpeedResponse = current.getWind_speed();
+
+            return new Weather(temperatureResponse, atmosphericPressureResponse, humidityResponse, windDirectionResponse, windSpeedResponse);
 
         } catch (Exception e) {
             throw new BadGatewayException("Nieudana próba pobrania pogody z serwisu: " + e.getMessage());
         }
-
     }
-
 }
