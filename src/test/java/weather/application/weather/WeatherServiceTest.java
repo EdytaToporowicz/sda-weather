@@ -1,8 +1,7 @@
 package weather.application.weather;
 
-import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,31 +12,31 @@ public class WeatherServiceTest {
     @Test
     void addWeatherParameters_shouldReturnNewWeatherParameters() {
         //when
-        WeatherParameters weatherParameters = weatherService.addWeatherParameters("miasto", 0, 0, "2020-10-25");
+        WeatherRequest weatherRequest = weatherService.getWeatherParameters("miasto", 0, 0, "2020-10-25");
         //then
-        assertEquals(weatherParameters.getCityName(), "miasto");
-        assertEquals(weatherParameters.getLatitude(), 0);
-        assertEquals(weatherParameters.getLongitude(), 0);
-        assertEquals(weatherParameters.getWeatherDate(), LocalDate.parse("2020-10-25"));
+        assertEquals(weatherRequest.getQuery(), "miasto");
+//        assertEquals(weatherRequest.get, 0);
+//        assertEquals(weatherRequest.getLongitude(), 0);
+//        assertEquals(weatherRequest.getWeatherDate(), LocalDate.parse("2020-10-25"));
     }
 
     @Test
     void addWeatherParameters_whenDateIsEmpty_shouldReturnNewWeatherParameters() {
         //when
-        WeatherParameters weatherParameters = weatherService.addWeatherParameters("city", 0, 0, "");
+        WeatherRequest weatherRequest = weatherService.getWeatherParameters("city", 0, 0, "");
         //then
-        assertEquals(weatherParameters.getCityName(), "city");
-        assertEquals(weatherParameters.getLatitude(), 0);
-        assertEquals(weatherParameters.getLongitude(), 0);
-        assertEquals(weatherParameters.getWeatherDate(), LocalDate.now().plusDays(1));
+        assertEquals(weatherRequest.getQuery(), "city");
+//        assertEquals(weatherRequest.getLatitude(), 0);
+//        assertEquals(weatherRequest.getLongitude(), 0);
+//        assertEquals(weatherRequest.getWeatherDate(), LocalDate.now().plusDays(1));
     }
-//    @Test   //jak sprawdzić gdy latitude puste
+//    @Test   //jak sprawdzić gdy lat puste
 //    void addWeatherParameters_whenLatitudeIsEmpty_shouldReturnNewWeatherParameters(){
 //
 //
 //    }
 
-    //    @Test   //jak sprawdzić gdy longitude puste
+    //    @Test   //jak sprawdzić gdy lon puste
 //    void addWeatherParameters_whenLongitudeIsEmpty_shouldReturnNewWeatherParameters(){
 //
 //
@@ -45,9 +44,9 @@ public class WeatherServiceTest {
     @Test
     void savedNewWeatherResponse_returnNewWeatherResponse() {
         //when
-        Weather response = weatherService.getWeatherResponse("London");
+        WeatherResponse weatherResponse = weatherService.getWeatherResponse();
 
         //then
-        System.out.println(response);
+        System.out.println(weatherResponse);
     }
 }

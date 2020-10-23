@@ -3,23 +3,18 @@ package weather.application.weather;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 @Data
+@NoArgsConstructor
 public class WeatherResponse {  // w resources/example_response.json wkleiłem strukturę otrzymanego JSON'a - są tam zagnieżdżone obiekty
-                                // struktura JOSN'a musi odpowiadać tej klasie
+    // struktura JOSN'a musi odpowiadać tej klasie
 
-    Current current;
+    private WeatherRequest weatherRequest;
+    private WeatherLocation weatherLocation;
+    private Current current;    //nazwa jak w strukturze jsona?
 
-    @Data
-    static class Current {              // ta klasa może być zdefiniowana w sobnym pliku np. Current.java
-        private String temperature;
-        private String pressure;
-        private String humidity;
-        private String wind_dir;
-        private String wind_speed;
+    public WeatherResponse(WeatherRequest weatherRequest, WeatherLocation weatherLocation, Current current) {
+        this.weatherRequest = weatherRequest;
+        this.weatherLocation = weatherLocation;
+        this.current = current;
     }
 }

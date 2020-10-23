@@ -28,7 +28,7 @@ public class Client {
                     break;
                 case 3:
                     getWeatherParameters();
-//                    getWeatherResponse();
+                    getWeatherResponse();
                     break;
                 case 0:
                     System.out.println("Zamykam aplikację.");
@@ -71,25 +71,27 @@ public class Client {
     private void getWeatherParameters() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
-        String weatherDate = scanner.nextLine();
+        String localtime = scanner.nextLine();
 
 
-        System.out.println("Podaj miasto dla pogody lub '@': ");
-        String cityName = scanner.nextLine();
+        System.out.println("Podaj miasto dla pogody: ");
+        String name = scanner.nextLine();
+        int lat = 0;
+        int lon = 0;
+        if (name.isEmpty()) {
+            System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N): ");
+            lat = scanner.nextInt();
 
-        System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N) dla pogody lub '@': ");
-        int latitude = scanner.nextInt();
-
-        System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E) dla pogody lub '@': ");
-        int longitude = scanner.nextInt();
-
-        String weatherParameters = weatherController.getWeatherParameters(cityName, latitude, longitude, weatherDate);
+            System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
+            lon = scanner.nextInt();
+        }
+        weatherController.getWeatherParameters(name, lat, lon, localtime);
     }
 
+    private void getWeatherResponse() {
+        String weatherResponse = weatherController.getWeatherResponse();
+        System.out.println("Pogoda w wybranej lokalizacji i dacie: " + weatherResponse);
 
-//    private void getWeatherResponse() {
-//        String weatherResponse = weatherController.getWeatherResponse();
-//        System.out.println("Pogoda dla wybranej lokalizacji i daty: " + weatherResponse);
-//    }
+    }
 }
 

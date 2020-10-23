@@ -9,10 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@NoArgsConstructor
 @Entity
-public class Weather {  // obiekt domenowy, czyli taki który wykorzystujemy w naszym kodzie i zapisujemy do bazy danych
-
+@NoArgsConstructor
+public class Current {       // ta klasa może być zdefiniowana w sobnym pliku np. Current.java
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +21,7 @@ public class Weather {  // obiekt domenowy, czyli taki który wykorzystujemy w n
     private String wind_dir;
     private String wind_speed;
 
-    public Weather(String temperature, String pressure, String humidity, String wind_dir, String wind_speed) {
+    public Current(String temperature, String pressure, String humidity, String wind_dir, String wind_speed) {
         this.temperature = temperature;
         this.pressure = pressure;
         this.humidity = humidity;
