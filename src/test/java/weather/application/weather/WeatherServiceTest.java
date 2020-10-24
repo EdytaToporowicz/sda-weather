@@ -3,6 +3,8 @@ package weather.application.weather;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WeatherServiceTest {
@@ -10,92 +12,72 @@ public class WeatherServiceTest {
 
 
     @Test
-    void addWeatherParameters_shouldReturnNewWeatherParameters() {
+    void getWeather_shouldReturnNewWeatherParameters() {
         //when
-        Weather weatherRequest = weatherService.getWeather("London", 0, 0, "2020-10-25");
+        Weather weatherRequest = weatherService.getWeather("miasto",50.1f, 50.1f,"2020-10-25");
         //then
         assertEquals(weatherRequest.getCityName(), "miasto");
-        assertEquals(weatherRequest.getLat(), 0);
-        assertEquals(weatherRequest.getLon(), 0);
+        assertEquals(weatherRequest.getLat(), 50.1f);
+        assertEquals(weatherRequest.getLon(), 50.1f);
         assertEquals(weatherRequest.getLocaltime(), "2020-10-25");
     }
 
     @Test
-    void addWeatherParameters_whenDateIsEmpty_shouldReturnNewWeatherParameters() {
+    void getWeather_whenDateIsEmpty_shouldReturnNewWeatherParameters() {
         //when
-        Weather weatherRequest = weatherService.getWeather("London", 0, 0, "2020-10-25");
+        Weather weatherRequest = weatherService.getWeather("London", 50.1f, 50.1f, "2020-10-25");
         //then
         assertEquals(weatherRequest.getCityName(), "miasto");
-        assertEquals(weatherRequest.getLat(), 0);
-        assertEquals(weatherRequest.getLon(), 0);
+        assertEquals(weatherRequest.getLat(), 50.1f);
+        assertEquals(weatherRequest.getLon(), 50.1f);
         assertEquals(weatherRequest.getLocaltime(), "2020-10-26");
     }
-//    @Test   //jak sprawdzić gdy lat puste
-//    void addWeatherParameters_whenLatitudeIsEmpty_shouldReturnNewWeatherParameters(){
-//
-//
-//    }
-
-    //    @Test   //jak sprawdzić gdy lon puste
-//    void addWeatherParameters_whenLongitudeIsEmpty_shouldReturnNewWeatherParameters(){
-//
-//
-//    }
 
     @Test
     void getWeatherResponseByCity_returnNewWeatherResponse() {
         // when
-        WeatherResponse response = weatherService.getWeatherResponseByCity("London");
+        WeatherResponse response = weatherService.getWeatherResponseByCity("London","2020-10-25 00:00:00");
 
         // then
-        WeatherCoordinates coord = response.getCoord();
-        assertTrue(coord.getLat() > -90);
-        assertTrue(coord.getLat() < 90);
-        assertTrue(coord.getLon() > -180);
-        assertTrue(coord.getLon() < 180);
+        List<WeatherParameters> list = response.getList();
+        assertFalse(list.get(0).getMain().getTemp().isBlank());
+        assertFalse(list.get(0).getMain().getPressure().isBlank());
+        assertFalse(list.get(0).getMain().getHumidity().isBlank());
+        assertFalse(list.get(1).getWind().getDeg().isBlank());
+        assertFalse(list.get(1).getWind().getSpeed().isBlank());
+        assertEquals(list.get(2).getDt_txt(), "2020-10-25 00:00:00");
 
-        Current main = response.getMain();
-        assertFalse(main.getTemp().isBlank());
-        assertFalse(main.getPressure().isBlank());
-        assertFalse(main.getHumidity().isBlank());
-
-        Wind wind = response.getWind();
-        assertFalse(wind.getDeg().isBlank());
-        assertFalse(wind.getSpeed().isBlank());
-
-        WeatherCountry sys = response.getSys();
-        assertEquals(sys.getCountry(), "GB");
-
-        assertEquals(response.getName(), "London");
+        WeatherCity city = response.getCity();
+        assertEquals(city.getName(), "London");
+        assertTrue(city.getCoord().getLat() > -90);
+        assertTrue(city.getCoord().getLat() < 90);
+        assertTrue(city.getCoord().getLon() < 180);
+        assertTrue(city.getCoord().getLon() > -180);
+        assertEquals(city.getCountry(),"GB");
 
     }
 
     @Test
     void getWeatherResponseByLatLon_returnNewWeatherResponse() {
         // when
-        WeatherResponse response = weatherService.getWeatherResponseByLatLon(0, 0);
+        WeatherResponse response = weatherService.getWeatherResponseByLatLon(0, 0,"2020-10-25 00:00:00");
 
         // then
-        WeatherCoordinates coord = response.getCoord();
-        assertTrue(coord.getLat() > -90);
-        assertTrue(coord.getLat() < 90);
-        assertTrue(coord.getLon() > -180);
-        assertTrue(coord.getLon() < 180);
+        List<WeatherParameters> list = response.getList();
+        assertFalse(list.get(0).getMain().getTemp().isBlank());
+        assertFalse(list.get(0).getMain().getPressure().isBlank());
+        assertFalse(list.get(0).getMain().getHumidity().isBlank());
+        assertFalse(list.get(1).getWind().getDeg().isBlank());
+        assertFalse(list.get(1).getWind().getSpeed().isBlank());
+        assertEquals(list.get(2).getDt_txt(), "2020-10-25 00:00:00");
 
-        Current main = response.getMain();
-        assertFalse(main.getTemp().isBlank());
-        assertFalse(main.getPressure().isBlank());
-        assertFalse(main.getHumidity().isBlank());
-
-        Wind wind = response.getWind();
-        assertFalse(wind.getDeg().isBlank());
-        assertFalse(wind.getSpeed().isBlank());
-
-        WeatherCountry sys = response.getSys();
-        assertEquals(sys.getCountry(), "GB");
-
-
-        assertEquals(response.getName(), "London");
+        WeatherCity city = response.getCity();
+        assertEquals(city.getName(), "Globe");
+        assertTrue(city.getCoord().getLat() > -90);
+        assertTrue(city.getCoord().getLat() < 90);
+        assertTrue(city.getCoord().getLon() < 180);
+        assertTrue(city.getCoord().getLon() > -180);
+        assertEquals(city.getCountry(),"");
     }
 
 

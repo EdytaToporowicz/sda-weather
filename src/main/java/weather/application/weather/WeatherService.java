@@ -25,7 +25,7 @@ public class WeatherService {   // warstwa logiki biznesowej
         objectMapper.findAndRegisterModules();
     }
 
-    public Weather getWeather(String cityName, int lat, int lon, String userDate) {
+    public Weather getWeather(String cityName, float lat, float lon, String userDate) {
         if (lat < -90 || lat > 90) {
             throw new BadRequestException("Niepoprawna szerokość.");
         }
@@ -40,17 +40,15 @@ public class WeatherService {   // warstwa logiki biznesowej
         } else {
             localtime = LocalDate.parse(userDate);
         }
-        String localtimeAsString = localtime.toString();
 
         WeatherResponse weatherResponse;
         if (cityName.isBlank()) {
-            weatherResponse = getWeatherResponseByLatLon(lat, lon);
+            weatherResponse = getWeatherResponseByLatLon(lat, lon,localtime.toString());
         } else {
-            weatherResponse = getWeatherResponseByCity(cityName);
+            weatherResponse = getWeatherResponseByCity(cityName, localtime.toString());
         }
 
         // todo fetch a forecast for specific date from WeatherResponse based on userDate
-        // todo map that specific forecast to Weather object
 
         Weather weather = weatherMapper.mapToWeather(weatherResponse);
 
@@ -58,13 +56,11 @@ public class WeatherService {   // warstwa logiki biznesowej
     }
 
     // todo move to WeatherForecastClient.java (optional)
-    public WeatherResponse getWeatherResponseByCity(String cityName) {    //gdy poda miasto
-
-        // todo api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+    public WeatherResponse getWeatherResponseByCity(String cityName, String userDate) {    //gdy poda miasto
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + ACCESS_KEY))
+                .uri(URI.create("http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + ACCESS_KEY + "&units=metric"))
                 .build();
 
         try {
@@ -77,12 +73,11 @@ public class WeatherService {   // warstwa logiki biznesowej
         }
     }
 
-    public WeatherResponse getWeatherResponseByLatLon(int lat, int lon) {   //gdy poda lat i lon
-        // todo api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+    public WeatherResponse getWeatherResponseByLatLon(float lat, float lon,String userDate) {   //gdy poda lat i lon
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://api.weatherstack.com/current?access_key=" + ACCESS_KEY + "&query=" + lat + "," + lon))  //czy dobre zapytanie?
+                .uri(URI.create("http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + ACCESS_KEY + "&units=metric"))
                 .build();
         try {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());

@@ -1,23 +1,22 @@
 package weather.application.weather;
 
+import java.util.List;
+
 public class WeatherMapper {
 
     public Weather mapToWeather(WeatherResponse weatherResponse) {
-        WeatherCoordinates coord = weatherResponse.getCoord();
-        Current main = weatherResponse.getMain();
-        Wind wind = weatherResponse.getWind();
-        WeatherCountry sys = weatherResponse.getSys();
-        String name = weatherResponse.getName();
+        List<WeatherParameters> list = weatherResponse.getList();
+        WeatherCity city = weatherResponse.getCity();
 
 
-        return new Weather(name,
-                (int) coord.getLat(),
-                (int) coord.getLon(),
-                main.getTemp(),
-                main.getPressure(),
-                main.getHumidity(),
-                wind.getDeg(),
-                wind.getSpeed(),
-                "");//brak daty w json // todo finish it
+        return new Weather(city.getName(),
+                city.getCoord().getLat(),
+                city.getCoord().getLon(),
+                list.get(0).getMain().getTemp(),
+                list.get(0).getMain().getPressure(),
+                list.get(0).getMain().getHumidity(),
+                list.get(1).getWind().getDeg(),
+                list.get(1).getWind().getSpeed(),
+                list.get(2).getDt_txt());
     }
 }

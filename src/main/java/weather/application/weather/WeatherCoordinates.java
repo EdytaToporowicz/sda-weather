@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class WeatherCoordinates {
-    private float lon;
     private float lat;
+    private float lon;
 }

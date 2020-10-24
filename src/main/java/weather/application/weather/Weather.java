@@ -17,8 +17,8 @@ public class Weather {  // obiekt domenowy, czyli taki który wykorzystujemy w n
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cityName;
-    private int lat;
-    private int lon;
+    private float lat;
+    private float lon;
     private String temperature;
     private String pressure;
     private String humidity;
@@ -26,7 +26,7 @@ public class Weather {  // obiekt domenowy, czyli taki który wykorzystujemy w n
     private String wind_speed;
     private String localtime;
 
-    public Weather(String cityName, int lat, int lon, String temperature, String pressure, String humidity, String wind_dir, String wind_speed, String localtime) {
+    public Weather(String cityName, float lat, float lon, String temperature, String pressure, String humidity, String wind_dir, String wind_speed, String localtime) {
         this.cityName = cityName;
         this.lat = lat;
         this.lon = lon;
