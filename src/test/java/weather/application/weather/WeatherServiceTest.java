@@ -45,47 +45,57 @@ public class WeatherServiceTest {
     @Test
     void getWeatherResponseByCity_returnNewWeatherResponse() {
         // when
-        WeatherResponse response = weatherService.getWeatherResponseByCity("London");
+        WeatherResponse response = weatherService.getWeatherResponseByCity("London","2020-10-24");
 
         // then
-        Current current = response.getCurrent();
-        assertFalse(current.getHumidity().isBlank());
-        assertFalse(current.getPressure().isBlank());
-        assertFalse(current.getTemperature().isBlank());
-        assertFalse(current.getWind_dir().isBlank());
-        assertFalse(current.getWind_speed().isBlank());
+        WeatherCoordinates coord = response.getCoord();
+        assertTrue(coord.getLat() > -90);
+        assertTrue(coord.getLat() < 90);
+        assertTrue(coord.getLon() > -180);
+        assertTrue(coord.getLon() < 180);
 
-        WeatherLocation location = response.getLocation();
-        assertFalse(location.getCountry().isBlank());
-        assertTrue(location.getLat() > -90);
-        assertTrue(location.getLat() < 90);
-        assertTrue(location.getLon() > -180);
-        assertTrue(location.getLon() < 180);
-        assertFalse(location.getLocaltime().isBlank());
-        assertFalse(location.getRegion().isBlank());
+        Current main = response.getMain();
+        assertFalse(main.getTemp().isBlank());
+        assertFalse(main.getPressure().isBlank());
+        assertFalse(main.getHumidity().isBlank());
+
+        Wind wind = response.getWind();
+        assertFalse(wind.getDeg().isBlank());
+        assertFalse(wind.getSpeed().isBlank());
+
+        WeatherCountry sys = response.getSys();
+        assertEquals(sys.getCountry(), "GB");
+
+        assertEquals(response.getName(),"London");
+
     }
 
     @Test
-    void getWeatherResponseByLatLon_returnNewWeatherResponse(){
+    void getWeatherResponseByLatLon_returnNewWeatherResponse() {
         // when
-        WeatherResponse response = weatherService.getWeatherResponseByLatLon(20, 20);
+        WeatherResponse response = weatherService.getWeatherResponseByLatLon(0,0,"2020-10-24");
 
         // then
-        Current current = response.getCurrent();
-        assertFalse(current.getHumidity().isBlank());
-        assertFalse(current.getPressure().isBlank());
-        assertFalse(current.getTemperature().isBlank());
-        assertFalse(current.getWind_dir().isBlank());
-        assertFalse(current.getWind_speed().isBlank());
+        WeatherCoordinates coord = response.getCoord();
+        assertTrue(coord.getLat() > -90);
+        assertTrue(coord.getLat() < 90);
+        assertTrue(coord.getLon() > -180);
+        assertTrue(coord.getLon() < 180);
 
-        WeatherLocation location = response.getLocation();
-        assertFalse(location.getCountry().isBlank());
-        assertTrue(location.getLat() > -90);
-        assertTrue(location.getLat() < 90);
-        assertTrue(location.getLon() > -180);
-        assertTrue(location.getLon() < 180);
-        assertFalse(location.getLocaltime().isBlank());
-        assertFalse(location.getRegion().isBlank());
+        Current main = response.getMain();
+        assertFalse(main.getTemp().isBlank());
+        assertFalse(main.getPressure().isBlank());
+        assertFalse(main.getHumidity().isBlank());
+
+        Wind wind = response.getWind();
+        assertFalse(wind.getDeg().isBlank());
+        assertFalse(wind.getSpeed().isBlank());
+
+        WeatherCountry sys = response.getSys();
+        assertEquals(sys.getCountry(), "GB");
+
+
+        assertEquals(response.getName(),"London");
     }
 
 

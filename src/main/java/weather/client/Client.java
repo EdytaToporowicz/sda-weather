@@ -3,7 +3,6 @@ package weather.client;
 import weather.application.location.LocationController;
 import weather.application.weather.WeatherController;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Client {
@@ -71,12 +70,7 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
         String userDate = scanner.nextLine();
-        LocalDate localtime;                             //???
-        if (userDate == null || userDate.isEmpty()) {
-            localtime = LocalDate.now().plusDays(1);
-        } else {
-            localtime = LocalDate.parse(userDate);
-        }
+
         System.out.println("Podaj miasto dla pogody: ");
         String name = scanner.nextLine();
         Integer lat = 0;
@@ -87,7 +81,7 @@ public class Client {
             System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
             lon = scanner.nextInt();
         }
-        String weather = weatherController.getWeather(name, lat, lon, localtime.toString());
+        String weather = weatherController.getWeather(name, lat, lon, userDate);
 
         System.out.println("Twoja prognoza: " + weather);
     }

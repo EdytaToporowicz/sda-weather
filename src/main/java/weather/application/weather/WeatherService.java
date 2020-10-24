@@ -9,13 +9,15 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
 
 public class WeatherService {   // warstwa logiki biznesowej
 
     private final WeatherRepository weatherRepository = new WeatherRepository();
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final String ACCESS_KEY = "036e872c7948b453473b70c5635fe4f7";
+    private final String ACCESS_KEY = "5d850280c7bc0a17e395eafa71ea2661";
+
     private final WeatherMapper weatherMapper = new WeatherMapper();
 
     public WeatherService() {
@@ -23,7 +25,7 @@ public class WeatherService {   // warstwa logiki biznesowej
         objectMapper.findAndRegisterModules();
     }
 
-    public Weather getWeather(String cityName, int lat, int lon, String localtime) {
+    public Weather getWeather(String cityName, int lat, int lon, String userDate) {
         if (lat < -90 || lat > 90) {
             throw new BadRequestException("Niepoprawna szerokość.");
         }
@@ -31,15 +33,23 @@ public class WeatherService {   // warstwa logiki biznesowej
             throw new BadRequestException("Niepoprawna długość.");
         }
 
-        // todo use localtime
+        // todo use userDate
+        LocalDate localtime;
+        if (userDate == null || userDate.isEmpty()) {
+            localtime = LocalDate.now().plusDays(1);
+        } else {
+            localtime = LocalDate.parse(userDate);
+        }
+        String localtimeAsString = localtime.toString();
+
         WeatherResponse weatherResponse;
         if (cityName.isBlank()) {
-            weatherResponse = getWeatherResponseByLatLon(lat, lon);
+            weatherResponse = getWeatherResponseByLatLon(lat, lon, localtimeAsString);
         } else {
-            weatherResponse = getWeatherResponseByCity(cityName);
+            weatherResponse = getWeatherResponseByCity(cityName,localtimeAsString);
         }
 
-        // todo fetch a forecast for specific date from WeatherResponse based on localtime
+        // todo fetch a forecast for specific date from WeatherResponse based on userDate
         // todo map that specific forecast to Weather object
 
         Weather weather = weatherMapper.mapToWeather(weatherResponse);
@@ -48,13 +58,11 @@ public class WeatherService {   // warstwa logiki biznesowej
     }
 
     // todo move to WeatherForecastClient.java (optional)
-    public WeatherResponse getWeatherResponseByCity(String cityName) {    //gdy poda miasto
-        // todo: use external service eg. https://weatherstack.com/documentation
-        // todo: create WeatherResponse as a container for new data (JSON -> object)
-
+    public WeatherResponse getWeatherResponseByCity(String cityName, String localtimeAsString) {    //gdy poda miasto
+        
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://api.weatherstack.com/current?access_key=" + ACCESS_KEY + "&query=" + cityName))
+                .uri(URI.create("api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + ACCESS_KEY))
                 .build();
 
         try {
@@ -67,7 +75,7 @@ public class WeatherService {   // warstwa logiki biznesowej
         }
     }
 
-    public WeatherResponse getWeatherResponseByLatLon(int lat, int lon) {   //gdy poda lat i lon
+    public WeatherResponse getWeatherResponseByLatLon(int lat, int lon,String localtimeAsString) {   //gdy poda lat i lon
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://api.weatherstack.com/current?access_key=" + ACCESS_KEY + "&query=" + lat + "," + lon))  //czy dobre zapytanie?

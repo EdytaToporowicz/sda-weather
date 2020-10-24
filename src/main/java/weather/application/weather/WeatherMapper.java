@@ -3,17 +3,21 @@ package weather.application.weather;
 public class WeatherMapper {
 
     public Weather mapToWeather(WeatherResponse weatherResponse) {
-        WeatherLocation location = weatherResponse.getLocation();
-        Current current = weatherResponse.getCurrent();
+        WeatherCoordinates coord = weatherResponse.getCoord();
+        Current main = weatherResponse.getMain();
+        Wind wind = weatherResponse.getWind();
+        WeatherCountry sys = weatherResponse.getSys();
+        String name = weatherResponse.getName();
 
-        return new Weather(location.getName(),
-                (int) location.getLat(),
-                (int) location.getLon(),
-                current.getTemperature(),
-                current.getPressure(),
-                current.getHumidity(),
-                current.getWind_dir(),
-                current.getWind_speed(),
-                location.getLocaltime());
+
+        return new Weather(name,
+                coord.getLat(),
+                coord.getLon(),
+                main.getTemp(),
+                main.getPressure(),
+                main.getHumidity(),
+                wind.getDeg(),
+                wind.getSpeed(),
+                )   ;//brak daty w json
     }
 }
