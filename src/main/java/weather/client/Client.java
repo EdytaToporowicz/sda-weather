@@ -3,6 +3,7 @@ package weather.client;
 import weather.application.location.LocationController;
 import weather.application.weather.WeatherController;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Client {
@@ -42,9 +43,9 @@ public class Client {
         System.out.println("Podaj miasto: ");
         String cityName = scanner.nextLine();
         System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N): ");
-        int latitude = scanner.nextInt();
+        Integer latitude = scanner.nextInt();
         System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
-        int longitude = scanner.nextInt();
+        Integer longitude = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Podaj region: ");
         String regionName = scanner.nextLine();
@@ -66,24 +67,27 @@ public class Client {
         System.out.println("Twoje lokalizacje: " + allLocations);
     }
 
-
     private void getWeather() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
-        String localtime = scanner.nextLine();
-
+        String userDate = scanner.nextLine();
+        LocalDate localtime;                             //???
+        if (userDate == null || userDate.isEmpty()) {
+            localtime = LocalDate.now().plusDays(1);
+        } else {
+            localtime = LocalDate.parse(userDate);
+        }
         System.out.println("Podaj miasto dla pogody: ");
         String name = scanner.nextLine();
-        int lat = 0;
-        int lon = 0;
+        Integer lat = 0;
+        Integer lon = 0;
         if (name.isEmpty()) {
             System.out.println("Podaj szerokość geograficzną (-90 -> S, 90 -> N): ");
             lat = scanner.nextInt();
-
             System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
             lon = scanner.nextInt();
         }
-        String weather = weatherController.getWeatherParameters(name, lat, lon, localtime);
+        String weather = weatherController.getWeather(name, lat, lon, localtime.toString());
 
         System.out.println("Twoja prognoza: " + weather);
     }

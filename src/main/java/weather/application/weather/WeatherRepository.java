@@ -13,7 +13,7 @@ public class WeatherRepository {        // warstwa danych
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        // todo save new Weather
+        session.persist(weather);
 
         transaction.commit();
         session.close();

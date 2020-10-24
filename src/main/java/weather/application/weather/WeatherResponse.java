@@ -8,4 +8,5 @@ public class WeatherResponse {  // w resources/example_response.json wkleiłem s
 
     private WeatherLocation location;
     private Current current;    //nazwa jak w strukturze jsona?
+
 }

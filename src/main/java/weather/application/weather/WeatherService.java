@@ -9,7 +9,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.LocalDate;
 
 public class WeatherService {   // warstwa logiki biznesowej
 
@@ -23,13 +22,7 @@ public class WeatherService {   // warstwa logiki biznesowej
         objectMapper.findAndRegisterModules();
     }
 
-    public Weather getWeatherParameters(String name, int lat, int lon, String localtime) {
-        LocalDate weatherDateFromString;
-        if (localtime == null || localtime.isEmpty()) {
-            weatherDateFromString = LocalDate.now().plusDays(1);    //data jutrzejsza
-        } else {
-            weatherDateFromString = LocalDate.parse(localtime);
-        }
+    public Weather getWeather(String name, int lat, int lon, String localtime) {
 
         if (lat < -90 || lat > 90) {
             throw new BadRequestException("Niepoprawna szerokość.");
@@ -40,20 +33,39 @@ public class WeatherService {   // warstwa logiki biznesowej
         }
 
         // todo use - data about the localization -> getWeatherResponse(cityName) -> WeatherResponse
+        WeatherResponse weatherResponseFromCityName = getWeatherResponseByCity(name);
+        WeatherResponse weatherResponseFromLatLon = getWeatherResponseByLatLon(lat, lon);
 
         // todo: WeatherResponse -> Weather
-//        new Weather(weatherResponse.getWeatherLocation().getName(), weatherResponse.getWeatherLocation().getLon() ...)
+        // new Weather(weatherResponse.getWeatherLocation().getName(), weatherResponse.getWeatherLocation().getLon() ...)
 
+        Weather weather = new Weather(weatherResponseFromCityName.getLocation().getName(),
+                weatherResponseFromCityName.getLocation().getLat(),
+                weatherResponseFromCityName.getLocation().getLon(),
+                weatherResponseFromCityName.getCurrent().getTemperature(),
+                weatherResponseFromCityName.getCurrent().getPressure(),
+                weatherResponseFromCityName.getCurrent().getHumidity(),
+                weatherResponseFromCityName.getCurrent().getWind_dir(),
+                weatherResponseFromCityName.getCurrent().getWind_speed(),
+                weatherResponseFromCityName.getLocation().getLocaltime());
+
+        Weather weather1 = new Weather(weatherResponseFromLatLon.getLocation().getName(),   //???
+                weatherResponseFromLatLon.getLocation().getLat(),
+                weatherResponseFromLatLon.getLocation().getLon(),
+                weatherResponseFromLatLon.getCurrent().getTemperature(),
+                weatherResponseFromLatLon.getCurrent().getPressure(),
+                weatherResponseFromLatLon.getCurrent().getHumidity(),
+                weatherResponseFromLatLon.getCurrent().getWind_dir(),
+                weatherResponseFromLatLon.getCurrent().getWind_speed(),
+                weatherResponseFromLatLon.getLocation().getLocaltime());
         // todo: save new data of weather to repository (Weather type)
 
-//        weatherRepository.saveWeather()
-
         // todo return a Weather object
-        return new Weather();
+        return weatherRepository.saveWeather(weather);
     }
 
     // todo move to WeatherForecastClient.java (optional)
-    public WeatherResponse getWeatherResponse(String cityName) {
+    public WeatherResponse getWeatherResponseByCity(String cityName) {    //gdy poda miasto
         // todo: use external service eg. https://weatherstack.com/documentation
         // todo: create WeatherResponse as a container for new data (JSON -> object)
 
@@ -71,4 +83,20 @@ public class WeatherService {   // warstwa logiki biznesowej
             throw new BadGatewayException("Nieudana próba pobrania pogody z serwisu: " + e.getMessage());
         }
     }
+
+    public WeatherResponse getWeatherResponseByLatLon(int lat, int lon) {   //gdy poda lat i lon
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("http://api.weatherstack.com/current?access_key=" + ACCESS_KEY + "&query=" + lat + "," + lon))  //czy dobre zapytanie?
+                .build();
+        try {
+            HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            String responseBody = httpResponse.body();
+            WeatherResponse weatherResponse = objectMapper.readValue(responseBody, WeatherResponse.class);
+            return weatherResponse;
+        } catch (Exception e) {
+            throw new BadGatewayException("Nieudana próba pobrania pogody z serwisu: " + e.getMessage());
+        }
+    }
+
 }

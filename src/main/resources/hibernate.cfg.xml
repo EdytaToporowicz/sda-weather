@@ -11,8 +11,6 @@
         <property name="format_sql">false</property>
         <property name="use.sql_comments">true</property>
         <mapping class="weather.application.location.Location"></mapping>
-        <mapping class="weather.application.weather.Current"></mapping>
-        <mapping class="weather.application.weather.WeatherRequest"></mapping>
-        <mapping class="weather.application.weather.WeatherResponse"></mapping>
+        <mapping class="weather.application.weather.Weather"></mapping>
     </session-factory>
 </hibernate-configuration>

@@ -12,23 +12,23 @@ public class WeatherServiceTest {
     @Test
     void addWeatherParameters_shouldReturnNewWeatherParameters() {
         //when
-        Weather weatherRequest = weatherService.getWeatherParameters("miasto", 0, 0, "2020-10-25");
+        Weather weatherRequest = weatherService.getWeather("London",0,0,"2020-10-25");
         //then
-//        assertEquals(weatherRequest.getQuery(), "miasto");
-//        assertEquals(weatherRequest.get, 0);
-//        assertEquals(weatherRequest.getLongitude(), 0);
-//        assertEquals(weatherRequest.getWeatherDate(), LocalDate.parse("2020-10-25"));
+        assertEquals(weatherRequest.getCityName(), "miasto");
+        assertEquals(weatherRequest.getLat(), 0);
+        assertEquals(weatherRequest.getLon(), 0);
+        assertEquals(weatherRequest.getLocaltime(),"2020-10-25");
     }
 
     @Test
     void addWeatherParameters_whenDateIsEmpty_shouldReturnNewWeatherParameters() {
         //when
-        Weather weather = weatherService.getWeatherParameters("city", 0, 0, "");
+        Weather weatherRequest = weatherService.getWeather("London",0,0,"2020-10-25");
         //then
-//        assertEquals(weatherRequest.getQuery(), "city");
-//        assertEquals(weatherRequest.getLatitude(), 0);
-//        assertEquals(weatherRequest.getLongitude(), 0);
-//        assertEquals(weatherRequest.getWeatherDate(), LocalDate.now().plusDays(1));
+        assertEquals(weatherRequest.getCityName(), "miasto");
+        assertEquals(weatherRequest.getLat(), 0);
+        assertEquals(weatherRequest.getLon(), 0);
+        assertEquals(weatherRequest.getLocaltime(),"2020-10-26");
     }
 //    @Test   //jak sprawdzić gdy lat puste
 //    void addWeatherParameters_whenLatitudeIsEmpty_shouldReturnNewWeatherParameters(){
@@ -44,7 +44,7 @@ public class WeatherServiceTest {
     @Test
     void savedNewWeatherResponse_returnNewWeatherResponse() {
         //when
-        WeatherResponse weatherResponse = weatherService.getWeatherResponse("London");
+        WeatherResponse weatherResponse = weatherService.getWeatherResponseByCity("London");
 
         //then
         System.out.println(weatherResponse);

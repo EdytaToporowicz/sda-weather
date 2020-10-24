@@ -22,17 +22,19 @@ public class Weather {  // obiekt domenowy, czyli taki który wykorzystujemy w n
     private String temperature;
     private String pressure;
     private String humidity;
-    private String windDir;
-    private String windSpeed;
+    private String wind_dir;
+    private String wind_speed;
+    private String localtime;
 
-    public Weather(String cityName, int lat, int lon, String temperature, String pressure, String humidity, String windDir, String windSpeed) {
+    public Weather(String cityName, int lat, int lon, String temperature, String pressure, String humidity, String wind_dir, String wind_speed, String localtime) {
         this.cityName = cityName;
         this.lat = lat;
         this.lon = lon;
         this.temperature = temperature;
         this.pressure = pressure;
         this.humidity = humidity;
-        this.windDir = windDir;
-        this.windSpeed = windSpeed;
+        this.wind_dir = wind_dir;
+        this.wind_speed = wind_speed;
+        this.localtime = localtime;
     }
 }
