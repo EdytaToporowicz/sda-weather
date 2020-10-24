@@ -45,7 +45,7 @@ public class WeatherServiceTest {
     @Test
     void getWeatherResponseByCity_returnNewWeatherResponse() {
         // when
-        WeatherResponse response = weatherService.getWeatherResponseByCity("London","2020-10-24");
+        WeatherResponse response = weatherService.getWeatherResponseByCity("London");
 
         // then
         WeatherCoordinates coord = response.getCoord();
@@ -66,14 +66,14 @@ public class WeatherServiceTest {
         WeatherCountry sys = response.getSys();
         assertEquals(sys.getCountry(), "GB");
 
-        assertEquals(response.getName(),"London");
+        assertEquals(response.getName(), "London");
 
     }
 
     @Test
     void getWeatherResponseByLatLon_returnNewWeatherResponse() {
         // when
-        WeatherResponse response = weatherService.getWeatherResponseByLatLon(0,0,"2020-10-24");
+        WeatherResponse response = weatherService.getWeatherResponseByLatLon(0, 0);
 
         // then
         WeatherCoordinates coord = response.getCoord();
@@ -95,7 +95,7 @@ public class WeatherServiceTest {
         assertEquals(sys.getCountry(), "GB");
 
 
-        assertEquals(response.getName(),"London");
+        assertEquals(response.getName(), "London");
     }
 
 

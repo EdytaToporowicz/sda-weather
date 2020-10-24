@@ -44,9 +44,9 @@ public class WeatherService {   // warstwa logiki biznesowej
 
         WeatherResponse weatherResponse;
         if (cityName.isBlank()) {
-            weatherResponse = getWeatherResponseByLatLon(lat, lon, localtimeAsString);
+            weatherResponse = getWeatherResponseByLatLon(lat, lon);
         } else {
-            weatherResponse = getWeatherResponseByCity(cityName,localtimeAsString);
+            weatherResponse = getWeatherResponseByCity(cityName);
         }
 
         // todo fetch a forecast for specific date from WeatherResponse based on userDate
@@ -58,11 +58,13 @@ public class WeatherService {   // warstwa logiki biznesowej
     }
 
     // todo move to WeatherForecastClient.java (optional)
-    public WeatherResponse getWeatherResponseByCity(String cityName, String localtimeAsString) {    //gdy poda miasto
-        
+    public WeatherResponse getWeatherResponseByCity(String cityName) {    //gdy poda miasto
+
+        // todo api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + ACCESS_KEY))
+                .uri(URI.create("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + ACCESS_KEY))
                 .build();
 
         try {
@@ -75,7 +77,9 @@ public class WeatherService {   // warstwa logiki biznesowej
         }
     }
 
-    public WeatherResponse getWeatherResponseByLatLon(int lat, int lon,String localtimeAsString) {   //gdy poda lat i lon
+    public WeatherResponse getWeatherResponseByLatLon(int lat, int lon) {   //gdy poda lat i lon
+        // todo api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("http://api.weatherstack.com/current?access_key=" + ACCESS_KEY + "&query=" + lat + "," + lon))  //czy dobre zapytanie?

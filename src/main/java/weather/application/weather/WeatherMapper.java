@@ -11,13 +11,13 @@ public class WeatherMapper {
 
 
         return new Weather(name,
-                coord.getLat(),
-                coord.getLon(),
+                (int) coord.getLat(),
+                (int) coord.getLon(),
                 main.getTemp(),
                 main.getPressure(),
                 main.getHumidity(),
                 wind.getDeg(),
                 wind.getSpeed(),
-                )   ;//brak daty w json
+                "");//brak daty w json // todo finish it
     }
 }
