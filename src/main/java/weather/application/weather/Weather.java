@@ -16,17 +16,23 @@ public class Weather {  // obiekt domenowy, czyli taki który wykorzystujemy w n
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String cityName;
+    private int lat;
+    private int lon;
     private String temperature;
     private String pressure;
     private String humidity;
-    private String wind_dir;
-    private String wind_speed;
+    private String windDir;
+    private String windSpeed;
 
-    public Weather(String temperature, String pressure, String humidity, String wind_dir, String wind_speed) {
+    public Weather(String cityName, int lat, int lon, String temperature, String pressure, String humidity, String windDir, String windSpeed) {
+        this.cityName = cityName;
+        this.lat = lat;
+        this.lon = lon;
         this.temperature = temperature;
         this.pressure = pressure;
         this.humidity = humidity;
-        this.wind_dir = wind_dir;
-        this.wind_speed = wind_speed;
+        this.windDir = windDir;
+        this.windSpeed = windSpeed;
     }
 }

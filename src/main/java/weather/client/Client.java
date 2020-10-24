@@ -27,8 +27,7 @@ public class Client {
                     showAllLocations();
                     break;
                 case 3:
-                    getWeatherParameters();
-                    getWeatherResponse();
+                    getWeather();
                     break;
                 case 0:
                     System.out.println("Zamykam aplikację.");
@@ -68,11 +67,10 @@ public class Client {
     }
 
 
-    private void getWeatherParameters() {
+    private void getWeather() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
         String localtime = scanner.nextLine();
-
 
         System.out.println("Podaj miasto dla pogody: ");
         String name = scanner.nextLine();
@@ -85,13 +83,9 @@ public class Client {
             System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
             lon = scanner.nextInt();
         }
-        weatherController.getWeatherParameters(name, lat, lon, localtime);
-    }
+        String weather = weatherController.getWeatherParameters(name, lat, lon, localtime);
 
-    private void getWeatherResponse() {
-        String weatherResponse = weatherController.getWeatherResponse();
-        System.out.println("Pogoda w wybranej lokalizacji i dacie: " + weatherResponse);
-
+        System.out.println("Twoja prognoza: " + weather);
     }
 }
 

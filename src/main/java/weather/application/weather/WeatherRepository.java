@@ -8,30 +8,16 @@ import weather.application.HibernateUtils;
 
 public class WeatherRepository {        // warstwa danych
 
-    public WeatherRequest getWeatherParameters(WeatherRequest weatherRequest) {
+    public Weather saveWeather(Weather weather) {
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.persist(weatherRequest);
+        // todo save new Weather
 
         transaction.commit();
         session.close();
 
-        return weatherRequest;
-    }
-
-
-    public WeatherResponse saveWeatherResponse(WeatherResponse weatherResponse) {
-        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-        session.persist(weatherResponse);
-
-        transaction.commit();
-        session.close();
-
-        return weatherResponse;
+        return weather;
     }
 }
