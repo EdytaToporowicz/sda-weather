@@ -46,6 +46,7 @@ public class WeatherServiceTest {
         //when
         WeatherResponse weatherResponse = weatherService.getWeatherResponseByCity("London");
 
+
         //then
         System.out.println(weatherResponse);
     }
