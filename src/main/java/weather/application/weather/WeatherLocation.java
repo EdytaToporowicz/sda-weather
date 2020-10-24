@@ -8,7 +8,7 @@ public class WeatherLocation {
     private String name;
     private String country;
     private String region;
-    private int lat;
-    private int lon;
+    private float lat;
+    private float lon;
     private String localtime;    //nazwa jak w json?
 }

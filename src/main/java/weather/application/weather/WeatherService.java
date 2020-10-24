@@ -16,51 +16,34 @@ public class WeatherService {   // warstwa logiki biznesowej
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final String ACCESS_KEY = "036e872c7948b453473b70c5635fe4f7";
+    private final WeatherMapper weatherMapper = new WeatherMapper();
 
     public WeatherService() {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.findAndRegisterModules();
     }
 
-    public Weather getWeather(String name, int lat, int lon, String localtime) {
-
+    public Weather getWeather(String cityName, int lat, int lon, String localtime) {
         if (lat < -90 || lat > 90) {
             throw new BadRequestException("Niepoprawna szerokość.");
         }
-
         if (lon < -180 || lon > 180) {
             throw new BadRequestException("Niepoprawna długość.");
         }
 
-        // todo use - data about the localization -> getWeatherResponse(cityName) -> WeatherResponse
-        WeatherResponse weatherResponseFromCityName = getWeatherResponseByCity(name);
-        WeatherResponse weatherResponseFromLatLon = getWeatherResponseByLatLon(lat, lon);
+        // todo use localtime
+        WeatherResponse weatherResponse;
+        if (cityName.isBlank()) {
+            weatherResponse = getWeatherResponseByLatLon(lat, lon);
+        } else {
+            weatherResponse = getWeatherResponseByCity(cityName);
+        }
 
-        // todo: WeatherResponse -> Weather
-        // new Weather(weatherResponse.getWeatherLocation().getName(), weatherResponse.getWeatherLocation().getLon() ...)
+        // todo fetch a forecast for specific date from WeatherResponse based on localtime
+        // todo map that specific forecast to Weather object
 
-        Weather weather = new Weather(weatherResponseFromCityName.getLocation().getName(),
-                weatherResponseFromCityName.getLocation().getLat(),
-                weatherResponseFromCityName.getLocation().getLon(),
-                weatherResponseFromCityName.getCurrent().getTemperature(),
-                weatherResponseFromCityName.getCurrent().getPressure(),
-                weatherResponseFromCityName.getCurrent().getHumidity(),
-                weatherResponseFromCityName.getCurrent().getWind_dir(),
-                weatherResponseFromCityName.getCurrent().getWind_speed(),
-                weatherResponseFromCityName.getLocation().getLocaltime());
+        Weather weather = weatherMapper.mapToWeather(weatherResponse);
 
-        Weather weather1 = new Weather(weatherResponseFromLatLon.getLocation().getName(),   //???
-                weatherResponseFromLatLon.getLocation().getLat(),
-                weatherResponseFromLatLon.getLocation().getLon(),
-                weatherResponseFromLatLon.getCurrent().getTemperature(),
-                weatherResponseFromLatLon.getCurrent().getPressure(),
-                weatherResponseFromLatLon.getCurrent().getHumidity(),
-                weatherResponseFromLatLon.getCurrent().getWind_dir(),
-                weatherResponseFromLatLon.getCurrent().getWind_speed(),
-                weatherResponseFromLatLon.getLocation().getLocaltime());
-        // todo: save new data of weather to repository (Weather type)
-
-        // todo return a Weather object
         return weatherRepository.saveWeather(weather);
     }
 
@@ -98,5 +81,4 @@ public class WeatherService {   // warstwa logiki biznesowej
             throw new BadGatewayException("Nieudana próba pobrania pogody z serwisu: " + e.getMessage());
         }
     }
-
 }
