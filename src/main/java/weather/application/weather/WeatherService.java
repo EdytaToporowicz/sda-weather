@@ -10,6 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class WeatherService {   // warstwa logiki biznesowej
 
@@ -33,17 +34,19 @@ public class WeatherService {   // warstwa logiki biznesowej
             throw new BadRequestException("Niepoprawna długość.");
         }
 
-        // todo use userDate
         LocalDate localtime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         if (userDate == null || userDate.isEmpty()) {
-            localtime = LocalDate.now().plusDays(1);
+            String dateNextDay = LocalDate.now().plusDays(1).toString();
+            localtime = LocalDate.parse(dateNextDay, formatter);
         } else {
-            localtime = LocalDate.parse(userDate);
+            localtime = LocalDate.parse(userDate, formatter);
         }
+
 
         WeatherResponse weatherResponse;
         if (cityName.isBlank()) {
-            weatherResponse = getWeatherResponseByLatLon(lat, lon,localtime.toString());
+            weatherResponse = getWeatherResponseByLatLon(lat, lon, localtime.toString());
         } else {
             weatherResponse = getWeatherResponseByCity(cityName, localtime.toString());
         }
@@ -73,7 +76,7 @@ public class WeatherService {   // warstwa logiki biznesowej
         }
     }
 
-    public WeatherResponse getWeatherResponseByLatLon(float lat, float lon,String userDate) {   //gdy poda lat i lon
+    public WeatherResponse getWeatherResponseByLatLon(float lat, float lon, String userDate) {   //gdy poda lat i lon
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()

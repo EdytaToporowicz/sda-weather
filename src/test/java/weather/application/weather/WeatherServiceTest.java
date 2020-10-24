@@ -14,23 +14,23 @@ public class WeatherServiceTest {
     @Test
     void getWeather_shouldReturnNewWeatherParameters() {
         //when
-        Weather weatherRequest = weatherService.getWeather("miasto",50.1f, 50.1f,"2020-10-25");
+        Weather weatherRequest = weatherService.getWeather("Miasto",52.9536f, 23.1757f,"2020-10-25 03:00:00");
         //then
-        assertEquals(weatherRequest.getCityName(), "miasto");
-        assertEquals(weatherRequest.getLat(), 50.1f);
-        assertEquals(weatherRequest.getLon(), 50.1f);
-        assertEquals(weatherRequest.getLocaltime(), "2020-10-25");
+        assertEquals(weatherRequest.getCityName(), "Miasto");
+        assertEquals(weatherRequest.getLat(), 52.9536f);
+        assertEquals(weatherRequest.getLon(), 23.1757f);
+        assertEquals(weatherRequest.getLocal_time(), "2020-10-25 03:00:00");
     }
 
     @Test
     void getWeather_whenDateIsEmpty_shouldReturnNewWeatherParameters() {
         //when
-        Weather weatherRequest = weatherService.getWeather("London", 50.1f, 50.1f, "2020-10-25");
+        Weather weatherRequest = weatherService.getWeather("Globe", 0, 0, "2020-10-25 03:00:00");
         //then
-        assertEquals(weatherRequest.getCityName(), "miasto");
-        assertEquals(weatherRequest.getLat(), 50.1f);
-        assertEquals(weatherRequest.getLon(), 50.1f);
-        assertEquals(weatherRequest.getLocaltime(), "2020-10-26");
+        assertEquals(weatherRequest.getCityName(), "Globe");
+        assertEquals(weatherRequest.getLat(), 0);
+        assertEquals(weatherRequest.getLon(), 0);
+        assertEquals(weatherRequest.getLocal_time(), "2020-10-25 03:00:00");
     }
 
     @Test
