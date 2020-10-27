@@ -69,10 +69,11 @@ public class Client {
     private void getWeather() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj datę prognozy (YYYY-MM-DD): ");
-        String userDate = scanner.nextLine() + " 12:00:00";
+        String userDate = scanner.nextLine(); //+ " 12:00:00"
 
         System.out.println("Podaj miasto dla pogody: ");
         String name = scanner.nextLine();
+
         Integer lat = 0;
         Integer lon = 0;
         if (name.isEmpty()) {
@@ -81,9 +82,9 @@ public class Client {
             System.out.println("Podaj długość geograficzną (-180 -> W, 180 -> E): ");
             lon = scanner.nextInt();
         }
+
         String weather = weatherController.getWeather(name, lat, lon, userDate);
         System.out.println(userDate);
-
         System.out.println("Twoja prognoza: " + weather);
     }
 }

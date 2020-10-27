@@ -10,7 +10,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class WeatherService {   // warstwa logiki biznesowej
 
@@ -34,28 +33,27 @@ public class WeatherService {   // warstwa logiki biznesowej
             throw new BadRequestException("Niepoprawna długość.");
         }
 
-        LocalDate localtime;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String userDateAndTime;
         if (userDate == null || userDate.isEmpty()) {
-            String dateNextDay = LocalDate.now().plusDays(1).toString();
-            localtime = LocalDate.parse(dateNextDay, formatter);
+            userDate = LocalDate.now().plusDays(1).toString();
+            userDateAndTime = userDate + " 12:00:00";
         } else {
-            localtime = LocalDate.parse(userDate, formatter);
+            userDateAndTime = userDate + " 12:00:00";
+
         }
 
 
         WeatherResponse weatherResponse;
         if (cityName.isBlank()) {
-            weatherResponse = getWeatherResponseByLatLon(lat, lon, localtime.toString());
+            weatherResponse = getWeatherResponseByLatLon(lat, lon, userDateAndTime);
         } else {
-            weatherResponse = getWeatherResponseByCity(cityName, localtime.toString());
+            weatherResponse = getWeatherResponseByCity(cityName, userDateAndTime);
         }
 
-        // todo fetch a forecast for specific date from WeatherResponse based on userDate
 
         Weather weather = weatherMapper.mapToWeather(weatherResponse);
-
         return weatherRepository.saveWeather(weather);
+
     }
 
     // todo move to WeatherForecastClient.java (optional)

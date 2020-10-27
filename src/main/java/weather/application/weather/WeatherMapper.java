@@ -15,8 +15,9 @@ public class WeatherMapper {
                 list.get(0).getMain().getTemp(),
                 list.get(0).getMain().getPressure(),
                 list.get(0).getMain().getHumidity(),
-                list.get(1).getWind().getDeg(),
-                list.get(1).getWind().getSpeed(),
-                list.get(2).getDt_txt());
+                list.get(0).getWind().getDeg(),
+                list.get(0).getWind().getSpeed(),
+                list.get(0).getDt_txt()
+        );
     }
 }
